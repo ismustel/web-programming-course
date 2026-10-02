@@ -68,6 +68,12 @@ const set3: TrainingSet = {
     tasks:[]
 }
 
+const setAllTasks: TrainingSet = {
+    id: "all-tasks",
+    title: "Все задания",
+    tasks:[task1, task2, task3, task4]
+}
+
 const answers1: Answer[] = [
     {
         taskId: "ts-1",
@@ -99,22 +105,23 @@ const answersBlank: Answer[] = [
 
 //========Поиск задания по Id========
 console.log("========Поиск задания по Id========")
-console.log("ts-1", findTask(set1,"ts-1"))
-console.log("ts-11111111", findTask(set1,"ts-11111111"))
+console.log("ts-1", findTask(set1,"ts-1")) // есть id
+console.log("ts-11111111", findTask(set1,"ts-11111111")) // нет id
 
 //========Фильтрация заданий по произвольной строке========
 console.log("========Фильтрация заданий по произвольной строке========")
-console.log("typescript", filterByTopic(set1, "typescript"))
-console.log("html", filterByTopic(set2, "html"))
-console.log("python", filterByTopic(set1, "python"))
-console.log("kotlin", filterByTopic(set3,"kotlin"))
+console.log("typescript", filterByTopic(set1, "typescript"))// филтр по ts
+console.log("html", filterByTopic(set2, "html"))// фильтр по html
+console.log("python", filterByTopic(set1, "python"))// фильтр по  питону которого нет в сете
+console.log("kotlin", filterByTopic(set3,"kotlin"))// фильтр по пустому сету
+console.log("Все задачи", filterByTopic(setAllTasks, "html"))//
 
 //========Прогресс======== 
 console.log("========Прогресс======== ")
-console.log(calcProgress(set1,answers1))
-console.log(calcProgress(set2,answers2))
-console.log(calcProgress(set3,answers1))
-console.log(calcProgress(set1,answers2))
+console.log(calcProgress(set1,answers1))// прогресс по полностью отвченым вопросам 
+console.log(calcProgress(set2,answers2))// прогресс по только одному отвеченному вопросу
+console.log(calcProgress(set3,answers1))// прогресс где нет заданий
+console.log(calcProgress(set1,answers2))// прогресс где чужой taskId
 
 //========Пробельный ответ======== 
 console.log("Пробельный ответ:", calcProgress(set1, answersBlank));

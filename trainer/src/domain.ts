@@ -42,28 +42,28 @@ export type TextAnswer = {
 
 export type Answer = ChoiceAnswer | TextAnswer;
 
-export function findTask(set: TrainingSet, id: string): Task|undefined {
+export function findTask(set: TrainingSet, id: string): Task | undefined {
     return set.tasks.find(task => task.id === id);
 }
 
-export function filterByTopic(set: TrainingSet, topic: string) : Task[]|undefined {
+export function filterByTopic(set: TrainingSet, topic: string): Task[] | undefined {
     return set.tasks.filter(task => task.topic === topic);
 }
 
 function isAnswerFilled(answer: Answer): boolean {
-    if (answer.kind === "short-text"){
+    if (answer.kind === "short-text") {
         return answer.text.trim() !== ""
     }
     return true
 }
 
-export function calcProgress(set: TrainingSet, answer: Answer[]): {filled: number, total: number} {
+export function calcProgress(set: TrainingSet, answer: Answer[]): { filled: number, total: number } {
     const total = set.tasks.length;
 
-    const filled = answer.filter(answer => 
+    const filled = answer.filter(answer =>
         findTask(set, answer.taskId) !== undefined && isAnswerFilled(answer)
     ).length;
 
-    return {filled, total};
+    return { filled, total };
 }
 
