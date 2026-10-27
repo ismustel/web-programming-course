@@ -50,7 +50,7 @@ export function filterByTopic(set: TrainingSet, topic: string) : Task[]|undefine
     return set.tasks.filter(task => task.topic === topic);
 }
 
-function isAnswerFilled(answer: Answer): boolean {
+export function isAnswerFilled(answer: Answer): boolean {
     if (answer.kind === "short-text"){
         return answer.text.trim() !== ""
     }
